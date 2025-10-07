@@ -5,755 +5,227 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amazon Global Selling Vietnam - Survey</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #fff5f0 0%, #e3f2fd 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            padding: 40px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .logo-amazon {
-            color: #FF9900;
-        }
-
-        .logo-text {
-            color: #232F3E;
-            font-size: 18px;
-        }
-
-        .admin-link {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #232F3E;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 12px;
-            opacity: 0.3;
-            transition: opacity 0.3s;
-        }
-
-        .admin-link:hover {
-            opacity: 1;
-        }
-
-        .progress-container {
-            margin-bottom: 30px;
-        }
-
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #FF9900 0%, #2196F3 100%);
-            transition: width 0.3s ease;
-        }
-
-        .question-section {
-            margin-bottom: 30px;
-        }
-
-        .question-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .required {
-            color: #f44336;
-        }
-
-        .question-description {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
-            white-space: pre-line;
-        }
-
-        .input-field {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #2196F3;
-        }
-
-        .select-field {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            background: white;
-            cursor: pointer;
-        }
-
-        .option-button {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            background: white;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-        }
-
-        .option-button:hover {
-            border-color: #2196F3;
-            background: #f5f5f5;
-        }
-
-        .option-button.selected {
-            border-color: #2196F3;
-            background: #e3f2fd;
-        }
-
-        .checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid #999;
-            border-radius: 4px;
-            margin-right: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .checkbox.checked {
-            background: #2196F3;
-            border-color: #2196F3;
-            color: white;
-        }
-
-        .file-upload {
-            border: 2px dashed #e0e0e0;
-            border-radius: 8px;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .file-upload:hover {
-            border-color: #2196F3;
-            background: #f5f5f5;
-        }
-
-        .file-upload-icon {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-back {
-            background: #e0e0e0;
-            color: #666;
-        }
-
-        .btn-back:hover:not(:disabled) {
-            background: #d0d0d0;
-        }
-
-        .btn-back:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .btn-next {
-            background: linear-gradient(90deg, #FF9900 0%, #2196F3 100%);
-            color: white;
-        }
-
-        .btn-next:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        .completion-screen {
-            text-align: center;
-        }
-
-        .completion-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #FF9900 0%, #2196F3 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 40px;
-            color: white;
-        }
-
-        .completion-title {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .completion-text {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .bonus-box {
-            background: #fff3e0;
-            border: 2px solid #FF9900;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .bonus-box p {
-            color: #e65100;
-            font-weight: bold;
-        }
-
-        .qr-placeholder {
-            width: 150px;
-            height: 150px;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            margin: 20px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Admin Panel Styles */
-        .admin-panel {
-            max-width: 1200px;
-        }
-
-        .admin-header {
-            background: #232F3E;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .logout-btn {
-            background: #FF9900;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .login-screen {
-            max-width: 400px;
-            margin: 100px auto;
-            text-align: center;
-        }
-
-        .login-input {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(90deg, #FF9900 0%, #2196F3 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #FF9900 0%, #2196F3 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-
-        .results-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .results-table th {
-            background: #232F3E;
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: bold;
-        }
-
-        .results-table td {
-            padding: 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .results-table tr:hover {
-            background: #f5f5f5;
-        }
-
-        .export-buttons {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .btn-export {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-json {
-            background: #2196F3;
-        }
-
-        .btn-csv {
-            background: #4CAF50;
-        }
-
-        .btn-clear {
-            background: #f44336;
-        }
-
-        .btn-export:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .response-detail {
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
-            cursor: pointer;
-        }
-
-        .response-detail:hover {
-            background: #e0e0e0;
-        }
-
-        .response-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .response-content {
-            font-size: 14px;
-            color: #666;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s;
-        }
-
-        .response-content.expanded {
-            max-height: 1000px;
-            padding-top: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            
-            .buttons, .export-buttons {
-                flex-direction: column;
-            }
-
-            .admin-header {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #fff5f0 0%, #e3f2fd 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 40px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .logo-amazon { color: #FF9900; }
+        .logo-text { color: #232F3E; font-size: 18px; }
+        .admin-link { position: fixed; bottom: 20px; right: 20px; background: #232F3E; color: white; padding: 10px 20px; border-radius: 50px; font-size: 12px; opacity: 0.3; transition: opacity 0.3s; border: none; cursor: pointer; }
+        .admin-link:hover { opacity: 1; }
+        .progress-container { margin-bottom: 30px; }
+        .progress-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; color: #666; }
+        .progress-bar { width: 100%; height: 8px; background: #e0e0e0; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #FF9900 0%, #2196F3 100%); transition: width 0.3s ease; }
+        .question-section { margin-bottom: 30px; }
+        .question-title { font-size: 24px; font-weight: bold; color: #333; margin-bottom: 10px; }
+        .required { color: #f44336; }
+        .question-description { font-size: 14px; color: #666; margin-bottom: 20px; white-space: pre-line; }
+        .input-field { width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; transition: border-color 0.3s; }
+        .input-field:focus { outline: none; border-color: #2196F3; }
+        .select-field { width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; background: white; cursor: pointer; }
+        .option-button { width: 100%; padding: 15px; margin-bottom: 10px; border: 2px solid #e0e0e0; border-radius: 8px; background: white; text-align: left; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; }
+        .option-button:hover { border-color: #2196F3; background: #f5f5f5; }
+        .option-button.selected { border-color: #2196F3; background: #e3f2fd; }
+        .checkbox { width: 20px; height: 20px; border: 2px solid #999; border-radius: 4px; margin-right: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .checkbox.checked { background: #2196F3; border-color: #2196F3; color: white; }
+        .file-upload { border: 2px dashed #e0e0e0; border-radius: 8px; padding: 40px; text-align: center; cursor: pointer; transition: all 0.3s; }
+        .file-upload:hover { border-color: #2196F3; background: #f5f5f5; }
+        .buttons { display: flex; justify-content: space-between; gap: 15px; margin-top: 30px; }
+        .btn { padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .btn-back { background: #e0e0e0; color: #666; }
+        .btn-back:hover:not(:disabled) { background: #d0d0d0; }
+        .btn-back:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-next { background: linear-gradient(90deg, #FF9900 0%, #2196F3 100%); color: white; }
+        .btn-next:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .completion-screen { text-align: center; }
+        .completion-icon { width: 80px; height: 80px; background: linear-gradient(135deg, #FF9900 0%, #2196F3 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 40px; color: white; }
+        .completion-title { font-size: 32px; font-weight: bold; margin-bottom: 20px; color: #333; }
+        .completion-text { font-size: 16px; color: #666; margin-bottom: 15px; line-height: 1.6; }
+        .bonus-box { background: #fff3e0; border: 2px solid #FF9900; border-radius: 8px; padding: 20px; margin: 20px 0; }
+        .bonus-box p { color: #e65100; font-weight: bold; }
+        .qr-container { width: 150px; height: 150px; background: white; border: 2px solid #e0e0e0; border-radius: 8px; margin: 20px auto; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .qr-container img { width: 100%; height: 100%; object-fit: contain; }
+        .hidden { display: none; }
+        .admin-panel { max-width: 1200px; }
+        .admin-header { background: #232F3E; color: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .admin-title { font-size: 24px; font-weight: bold; }
+        .logout-btn { background: #FF9900; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .login-screen { max-width: 400px; margin: 100px auto; text-align: center; }
+        .login-input { width: 100%; padding: 15px; margin: 10px 0; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; }
+        .login-btn { width: 100%; padding: 15px; background: linear-gradient(90deg, #FF9900 0%, #2196F3 100%); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: linear-gradient(135deg, #FF9900 0%, #2196F3 100%); color: white; padding: 30px; border-radius: 12px; text-align: center; }
+        .stat-number { font-size: 48px; font-weight: bold; margin-bottom: 10px; }
+        .stat-label { font-size: 16px; opacity: 0.9; }
+        .export-buttons { display: flex; gap: 15px; margin-bottom: 30px; }
+        .btn-export { padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; color: white; display: flex; align-items: center; gap: 10px; }
+        .btn-json { background: #2196F3; }
+        .btn-csv { background: #4CAF50; }
+        .btn-clear { background: #f44336; }
+        .btn-export:hover { opacity: 0.9; transform: translateY(-2px); }
+        .response-detail { background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 10px 0; cursor: pointer; }
+        .response-detail:hover { background: #e0e0e0; }
+        .response-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 10px; }
+        .response-content { font-size: 14px; color: #666; max-height: 0; overflow: hidden; transition: max-height 0.3s; }
+        .response-content.expanded { max-height: 2000px; padding-top: 10px; }
+        @media (max-width: 768px) { .container { padding: 20px; } .buttons, .export-buttons { flex-direction: column; } .admin-header { flex-direction: column; gap: 15px; } }
     </style>
 </head>
 <body>
-    <!-- Survey Screen -->
     <div class="container" id="survey-container">
-        <div class="header">
-            <div class="logo">
-                <span class="logo-amazon">amazon</span> <span class="logo-text">global selling</span>
-            </div>
-        </div>
-
+        <div class="header"><div class="logo"><span class="logo-amazon">amazon</span> <span class="logo-text">global selling</span></div></div>
         <div id="survey-screen">
-            <div class="progress-container">
-                <div class="progress-info">
-                    <span>Tiến độ / Progress</span>
-                    <span id="progress-text">0%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
-                </div>
-            </div>
-
-            <div class="question-section">
-                <h2 class="question-title" id="question-title"></h2>
-                <p class="question-description" id="question-description"></p>
-                <div id="question-content"></div>
-            </div>
-
-            <div class="buttons">
-                <button class="btn btn-back" id="btn-back" onclick="goBack()">
-                    ← Quay lại
-                </button>
-                <button class="btn btn-next" id="btn-next" onclick="goNext()">
-                    Tiếp theo →
-                </button>
-            </div>
+            <div class="progress-container"><div class="progress-info"><span>Tiến độ / Progress</span><span id="progress-text">0%</span></div><div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 0%"></div></div></div>
+            <div class="question-section"><h2 class="question-title" id="question-title"></h2><p class="question-description" id="question-description"></p><div id="question-content"></div></div>
+            <div class="buttons"><button class="btn btn-back" id="btn-back" onclick="goBack()">← Quay lại</button><button class="btn btn-next" id="btn-next" onclick="goNext()">Tiếp theo →</button></div>
         </div>
-
         <div id="completion-screen" class="completion-screen hidden">
-            <div class="completion-icon">✓</div>
-            <h2 class="completion-title">Cảm ơn bạn!</h2>
-            <p class="completion-text">
-                Cảm ơn Nhà bán hàng đã điền thông tin. Chúng tôi sẽ liên hệ để xác minh thông tin.
-            </p>
-            <p class="completion-text">
-                Vui lòng theo dõi Zalo Official Account Amazon Global Selling Vietnam để cập nhật tin tức chính thống về bán hàng trên Amazon.
-            </p>
-            <div id="bonus-section" class="bonus-box hidden">
-                <p>🎁 Truy cập tại đây để tải trọn Bộ tài liệu khai thác tiềm năng các ngành hàng trên Amazon</p>
-            </div>
-            <div class="qr-placeholder">
-                <img src="zalo-qr.png" alt="Zalo QR Code" style="width: 100%; height: 100%; object-fit: contain;">
-            </div>
+            <div class="completion-icon">✓</div><h2 class="completion-title">Cảm ơn bạn!</h2>
+            <p class="completion-text">Cảm ơn Nhà bán hàng đã điền thông tin. Chúng tôi sẽ liên hệ để xác minh thông tin.</p>
+            <p class="completion-text">Vui lòng theo dõi Zalo Official Account Amazon Global Selling Vietnam để cập nhật tin tức chính thống về bán hàng trên Amazon.</p>
+            <div id="bonus-section" class="bonus-box hidden"><p>🎁 Truy cập tại đây để tải trọn Bộ tài liệu khai thác tiềm năng các ngành hàng trên Amazon</p></div>
+            <div class="qr-container"><img src="zalo-qr.png" alt="Zalo QR Code"></div>
             <p style="font-size: 14px; color: #666; margin-top: 10px;">Scan to follow us on Zalo</p>
-
-            <button class="btn btn-next" onclick="restart()" style="margin-top: 30px; width: 100%; justify-content: center;">
-                Start New Survey
-            </button>
+            <button class="btn btn-next" onclick="restart()" style="margin-top: 30px; width: 100%; justify-content: center;">Start New Survey</button>
         </div>
-
-        <button onclick="goToAdmin()" class="admin-link" style="border: none; cursor: pointer;">🔐 Admin</button>
+        <button onclick="goToAdmin()" class="admin-link">🔐 Admin</button>
     </div>
-
-    <!-- Admin Panel -->
     <div class="container admin-panel hidden" id="admin-panel">
         <div id="login-screen" class="login-screen">
-            <div class="header">
-                <div class="logo">
-                    <span class="logo-amazon">amazon</span> <span class="logo-text">global selling</span>
-                </div>
-                <h2 style="margin-top: 20px;">Admin Login</h2>
-            </div>
+            <div class="header"><div class="logo"><span class="logo-amazon">amazon</span> <span class="logo-text">global selling</span></div><h2 style="margin-top: 20px;">Admin Login</h2></div>
             <input type="password" id="admin-password" class="login-input" placeholder="Enter password">
             <button class="login-btn" onclick="adminLogin()">Login</button>
-            <p style="margin-top: 20px;"><a href="?" style="color: #2196F3;">← Back to Survey</a></p>
+            <p style="margin-top: 20px;"><a href="#" onclick="adminLogout(); return false;" style="color: #2196F3;">← Back to Survey</a></p>
         </div>
-
         <div id="admin-content" class="hidden">
-            <div class="admin-header">
-                <div class="admin-title">📊 Survey Results Dashboard</div>
-                <button class="logout-btn" onclick="adminLogout()">Logout</button>
-            </div>
-
+            <div class="admin-header"><div class="admin-title">📊 Survey Results Dashboard</div><button class="logout-btn" onclick="adminLogout()">Logout</button></div>
             <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="total-responses">0</div>
-                    <div class="stat-label">Total Responses</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="today-responses">0</div>
-                    <div class="stat-label">Today's Responses</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="with-images">0</div>
-                    <div class="stat-label">With Product Images</div>
-                </div>
+                <div class="stat-card"><div class="stat-number" id="total-responses">0</div><div class="stat-label">Total Responses</div></div>
+                <div class="stat-card"><div class="stat-number" id="today-responses">0</div><div class="stat-label">Today's Responses</div></div>
+                <div class="stat-card"><div class="stat-number" id="with-images">0</div><div class="stat-label">With Product Images</div></div>
             </div>
-
             <div class="export-buttons">
-                <button class="btn-export btn-json" onclick="adminExportJSON()">
-                    📥 Export All as JSON
-                </button>
-                <button class="btn-export btn-csv" onclick="adminExportCSV()">
-                    📥 Export All as CSV
-                </button>
-                <button class="btn-export btn-clear" onclick="clearAllData()">
-                    🗑️ Clear All Data
-                </button>
+                <button class="btn-export btn-json" onclick="adminExportJSON()">📥 Export All as JSON</button>
+                <button class="btn-export btn-csv" onclick="adminExportCSV()">📥 Export All as CSV</button>
+                <button class="btn-export btn-clear" onclick="clearAllData()">🗑️ Clear All Data</button>
             </div>
-
             <h3 style="margin-bottom: 20px; font-size: 20px;">All Survey Responses:</h3>
             <div id="responses-list"></div>
         </div>
     </div>
-
     <script>
-        const ADMIN_PASSWORD = 'Amazon2025'; // Change this to your secure password
+        const ADMIN_PASSWORD = 'Amazon2025';
         const STORAGE_KEY = 'amazon_survey_responses';
-
         const categories = {
-            'apparel': {
-                vn: 'Thời trang (Apparel)',
-                subcategories: [
-                    { vn: 'Đồ thể thao (Active Wear)', value: 'active_wear' },
-                    { vn: 'Áo/Quần/Váy/Đầm (Tops & Bottoms/Dresses)', value: 'tops_bottoms' },
-                    { vn: 'Đồ bơi/đồ lót (Swimwear & Intimates)', value: 'swimwear' },
-                    { vn: 'Tất/Vớ (Socks)', value: 'socks' },
-                    { vn: 'Phụ kiện thời trang (Accessories)', value: 'accessories' }
-                ]
-            },
-            'baby': {
-                vn: 'Đồ trẻ em (Baby)',
-                subcategories: [
-                    { vn: 'Quần áo trẻ em (Baby Clothing)', value: 'baby_clothing' },
-                    { vn: 'Đồ dùng em bé (Baby Gear)', value: 'baby_gear' },
-                    { vn: 'Tã bỉm (Diapers)', value: 'diapers' },
-                    { vn: 'Đồ phòng ngủ trẻ em (Nursery)', value: 'nursery' },
-                    { vn: 'Đồ chơi & Dụng cụ tương tác (Toys & Activities)', value: 'toys' }
-                ]
-            },
-            'electronics': {
-                vn: 'Điện tử (Electronics)',
-                subcategories: [
-                    { vn: 'Âm thanh & Tai nghe (Audio & Headphones)', value: 'audio' },
-                    { vn: 'TV & Video (TV & Video)', value: 'tv_video' },
-                    { vn: 'Thiết bị nhà thông minh (Smart Home Devices)', value: 'smart_home' },
-                    { vn: 'Công nghệ đeo (Wearable Technology)', value: 'wearable' },
-                    { vn: 'Phụ kiện (Accessories)', value: 'accessories' }
-                ]
-            },
-            'grocery': {
-                vn: 'Thực phẩm (Grocery)',
-                subcategories: [
-                    { vn: 'Đồ uống bột, trà, cà phê,.. (Beverages)', value: 'beverages' },
-                    { vn: 'Đồ ăn vặt (Snacks)', value: 'snacks' },
-                    { vn: 'Sữa & Sản phẩm từ sữa (Dairy)', value: 'dairy' },
-                    { vn: 'Đồ khô (Dry Goods)', value: 'dry_goods' },
-                    { vn: 'Gia vị (Condiments)', value: 'condiments' }
-                ]
-            },
-            'home': {
-                vn: 'Đồ gia dụng & nội thất (Home & Furniture)',
-                subcategories: [
-                    { vn: 'Nội thất phòng khách, phòng ngủ, phòng ăn (Indoor Furniture)', value: 'indoor_furniture' },
-                    { vn: 'Trang trí nhà cửa (Home Decor)', value: 'home_decor' },
-                    { vn: 'Đèn & Chiếu sáng (Lighting)', value: 'lighting' },
-                    { vn: 'Tủ & Kệ (Storage & Organization)', value: 'storage' },
-                    { vn: 'Đồ dệt may & Chăn ga (Textiles & Bedding)', value: 'textiles' }
-                ]
-            },
-            'kitchen': {
-                vn: 'Nhà bếp (Kitchen)',
-                subcategories: [
-                    { vn: 'Thiết bị gia dụng (Appliances)', value: 'appliances' },
-                    { vn: 'Dụng cụ nấu ăn (Cookware)', value: 'cookware' },
-                    { vn: 'Đồ dùng nhà bếp (Utensils)', value: 'utensils' },
-                    { vn: 'Hộp đựng & Sắp xếp (Storage & Organization)', value: 'storage' },
-                    { vn: 'Bàn ăn & Phục vụ (Dining & Serving)', value: 'dining' }
-                ]
-            },
-            'office': {
-                vn: 'Văn phòng phẩm (Office Products)',
-                subcategories: [
-                    { vn: 'Đồ dùng viết (Writing Supplies)', value: 'writing' },
-                    { vn: 'Sản phẩm giấy (Paper Products)', value: 'paper' },
-                    { vn: 'Thiết bị văn phòng (Office Electronics)', value: 'electronics' },
-                    { vn: 'Hồ sơ & Lưu trữ (Filing & Storage)', value: 'filing' },
-                    { vn: 'Vật tư in ấn (Printing Supplies)', value: 'printing' }
-                ]
-            },
-            'pet': {
-                vn: 'Đồ thú cưng (Pet Supplies)',
-                subcategories: [
-                    { vn: 'Đồ chơi (Toys)', value: 'toys' },
-                    { vn: 'Giường & Nội thất (Beds & Furniture)', value: 'beds' },
-                    { vn: 'Thức ăn & sức khỏe (Food & Wellness/Grooming)', value: 'food_wellness' },
-                    { vn: 'Vòng cổ & Dây dắt (Collars & Leashes)', value: 'collars' },
-                    { vn: 'Lồng & Đồ du lịch (Carriers & Travel)', value: 'carriers' }
-                ]
-            },
-            'shoes': {
-                vn: 'Giày dép (Shoes)',
-                subcategories: [
-                    { vn: 'Giày thể thao (Athletic Shoes)', value: 'athletic' },
-                    { vn: 'Giày thường (Casual Shoes)', value: 'casual' },
-                    { vn: 'Giày trang trọng (Formal Shoes)', value: 'formal' },
-                    { vn: 'Dép (Sandals & Slippers)', value: 'sandals' },
-                    { vn: 'Ủng/Bốt (Boots)', value: 'boots' }
-                ]
-            },
-            'sports': {
-                vn: 'Thể thao (Sports)',
-                subcategories: [
-                    { vn: 'Thiết bị tập thể dục (Fitness Equipment)', value: 'fitness' },
-                    { vn: 'Thiết bị hoạt động ngoài trời (Outdoor Recreation)', value: 'outdoor' },
-                    { vn: 'Phụ kiện thể thao (Sports Accessories)', value: 'accessories' },
-                    { vn: 'Quần áo thể thao (Athletic Clothing)', value: 'athletic_clothing' },
-                    { vn: 'Sản phẩm dinh dưỡng thể thao (Sports Nutrition)', value: 'nutrition' }
-                ]
-            }
+            'apparel': { vn: 'Thời trang (Apparel)', subcategories: [
+                { vn: 'Đồ thể thao (Active Wear)', value: 'active_wear' },
+                { vn: 'Áo/Quần/Váy/Đầm (Tops & Bottoms/Dresses)', value: 'tops_bottoms' },
+                { vn: 'Đồ bơi/đồ lót (Swimwear & Intimates)', value: 'swimwear' },
+                { vn: 'Tất/Vớ (Socks)', value: 'socks' },
+                { vn: 'Phụ kiện thời trang (Accessories)', value: 'accessories' }
+            ]},
+            'baby': { vn: 'Đồ trẻ em (Baby)', subcategories: [
+                { vn: 'Quần áo trẻ em (Baby Clothing)', value: 'baby_clothing' },
+                { vn: 'Đồ dùng em bé (Baby Gear)', value: 'baby_gear' },
+                { vn: 'Tã bỉm (Diapers)', value: 'diapers' },
+                { vn: 'Đồ phòng ngủ trẻ em (Nursery)', value: 'nursery' },
+                { vn: 'Đồ chơi & Dụng cụ tương tác (Toys & Activities)', value: 'toys' }
+            ]},
+            'electronics': { vn: 'Điện tử (Electronics)', subcategories: [
+                { vn: 'Âm thanh & Tai nghe (Audio & Headphones)', value: 'audio' },
+                { vn: 'TV & Video (TV & Video)', value: 'tv_video' },
+                { vn: 'Thiết bị nhà thông minh (Smart Home Devices)', value: 'smart_home' },
+                { vn: 'Công nghệ đeo (Wearable Technology)', value: 'wearable' },
+                { vn: 'Phụ kiện (Accessories)', value: 'accessories' }
+            ]},
+            'grocery': { vn: 'Thực phẩm (Grocery)', subcategories: [
+                { vn: 'Đồ uống bột, trà, cà phê,.. (Beverages)', value: 'beverages' },
+                { vn: 'Đồ ăn vặt (Snacks)', value: 'snacks' },
+                { vn: 'Sữa & Sản phẩm từ sữa (Dairy)', value: 'dairy' },
+                { vn: 'Đồ khô (Dry Goods)', value: 'dry_goods' },
+                { vn: 'Gia vị (Condiments)', value: 'condiments' }
+            ]},
+            'home': { vn: 'Đồ gia dụng & nội thất (Home & Furniture)', subcategories: [
+                { vn: 'Nội thất phòng khách, phòng ngủ, phòng ăn (Indoor Furniture)', value: 'indoor_furniture' },
+                { vn: 'Trang trí nhà cửa (Home Decor)', value: 'home_decor' },
+                { vn: 'Đèn & Chiếu sáng (Lighting)', value: 'lighting' },
+                { vn: 'Tủ & Kệ (Storage & Organization)', value: 'storage' },
+                { vn: 'Đồ dệt may & Chăn ga (Textiles & Bedding)', value: 'textiles' }
+            ]},
+            'kitchen': { vn: 'Nhà bếp (Kitchen)', subcategories: [
+                { vn: 'Thiết bị gia dụng (Appliances)', value: 'appliances' },
+                { vn: 'Dụng cụ nấu ăn (Cookware)', value: 'cookware' },
+                { vn: 'Đồ dùng nhà bếp (Utensils)', value: 'utensils' },
+                { vn: 'Hộp đựng & Sắp xếp (Storage & Organization)', value: 'storage' },
+                { vn: 'Bàn ăn & Phục vụ (Dining & Serving)', value: 'dining' }
+            ]},
+            'office': { vn: 'Văn phòng phẩm (Office Products)', subcategories: [
+                { vn: 'Đồ dùng viết (Writing Supplies)', value: 'writing' },
+                { vn: 'Sản phẩm giấy (Paper Products)', value: 'paper' },
+                { vn: 'Thiết bị văn phòng (Office Electronics)', value: 'electronics' },
+                { vn: 'Hồ sơ & Lưu trữ (Filing & Storage)', value: 'filing' },
+                { vn: 'Vật tư in ấn (Printing Supplies)', value: 'printing' }
+            ]},
+            'pet': { vn: 'Đồ thú cưng (Pet Supplies)', subcategories: [
+                { vn: 'Đồ chơi (Toys)', value: 'toys' },
+                { vn: 'Giường & Nội thất (Beds & Furniture)', value: 'beds' },
+                { vn: 'Thức ăn & sức khỏe (Food & Wellness/Grooming)', value: 'food_wellness' },
+                { vn: 'Vòng cổ & Dây dắt (Collars & Leashes)', value: 'collars' },
+                { vn: 'Lồng & Đồ du lịch (Carriers & Travel)', value: 'carriers' }
+            ]},
+            'shoes': { vn: 'Giày dép (Shoes)', subcategories: [
+                { vn: 'Giày thể thao (Athletic Shoes)', value: 'athletic' },
+                { vn: 'Giày thường (Casual Shoes)', value: 'casual' },
+                { vn: 'Giày trang trọng (Formal Shoes)', value: 'formal' },
+                { vn: 'Dép (Sandals & Slippers)', value: 'sandals' },
+                { vn: 'Ủng/Bốt (Boots)', value: 'boots' }
+            ]},
+            'sports': { vn: 'Thể thao (Sports)', subcategories: [
+                { vn: 'Thiết bị tập thể dục (Fitness Equipment)', value: 'fitness' },
+                { vn: 'Thiết bị hoạt động ngoài trời (Outdoor Recreation)', value: 'outdoor' },
+                { vn: 'Phụ kiện thể thao (Sports Accessories)', value: 'accessories' },
+                { vn: 'Quần áo thể thao (Athletic Clothing)', value: 'athletic_clothing' },
+                { vn: 'Sản phẩm dinh dưỡng thể thao (Sports Nutrition)', value: 'nutrition' }
+            ]}
         };
-
         const questions = {
             1: { textVN: 'Tên người liên hệ', type: 'text', required: true, next: 2 },
             2: { textVN: 'Tên doanh nghiệp hoặc thương hiệu', type: 'text', required: true, next: 3 },
             3: { textVN: 'Số điện thoại liên hệ', type: 'tel', required: true, next: 4 },
             4: { textVN: 'Email liên hệ', type: 'email', required: true, next: 5 },
             5: { textVN: 'Website/liên kết mạng xã hội của doanh nghiệp (nếu có)', type: 'text', required: false, next: 6 },
-            6: {
-                textVN: 'Ngành hàng bạn dự định bán trên Amazon là gì?',
-                type: 'dropdown',
-                required: true,
-                options: [
-                    ...Object.keys(categories).map(key => ({ value: key, label: categories[key].vn, next: `7_${key}` })),
-                    { value: 'other', label: 'Khác - vui lòng nêu rõ (Others - Please specify)', next: 8 }
-                ]
-            },
-            8: {
-                textVN: 'Chia sẻ hình ảnh sản phẩm dự kiến kinh doanh (Khuyến khích)',
-                type: 'file',
-                required: false,
+            6: { textVN: 'Ngành hàng bạn dự định bán trên Amazon là gì?', type: 'dropdown', required: true, options: [
+                ...Object.keys(categories).map(key => ({ value: key, label: categories[key].vn, next: '7_' + key })),
+                { value: 'other', label: 'Khác - vui lòng nêu rõ (Others - Please specify)', next: 8 }
+            ]},
+            8: { textVN: 'Chia sẻ hình ảnh sản phẩm dự kiến kinh doanh (Khuyến khích)', type: 'file', required: false, 
                 description: '*Khi đính kèm hình ảnh, bạn sẽ có CƠ HỘI NHẬN NGAY:\n- Trọn bộ tài liệu khai thác tiềm năng các ngành hàng trên Amazon\n- 1 năm đồng hành hỗ trợ miễn phí cùng đội ngũ Amazon Global Selling',
-                next: 13
-            },
-            13: {
-                textVN: 'Thông báo quyền riêng tư và Thư đồng ý xử lý dữ liệu cá nhân từ Amazon Global Selling Vietnam',
-                type: 'consent',
-                required: true,
+                next: 9 },
+            9: { textVN: 'Mô hình kinh doanh của bạn:', type: 'dropdown', required: false, options: [
+                { value: 'manufacturer', label: 'Nhà máy/Cơ sở sản xuất' },
+                { value: 'local_brand', label: 'Thương hiệu trong nước (local brand)' },
+                { value: 'individual', label: 'Cá nhân/Hộ kinh doanh' },
+                { value: 'reseller', label: 'Nhà phân phối, đại lý, bán lẻ' },
+                { value: 'other', label: 'Khác (vui lòng nêu rõ)' }
+            ], next: 10 },
+            10: { textVN: 'Vui lòng nhập mã định danh doanh nghiệp hoặc mã định danh cá nhân', type: 'text', required: false, next: 11 },
+            11: { textVN: 'Kinh nghiệm xuất khẩu của bạn:', type: 'dropdown', required: false, options: [
+                { value: 'us_eu', label: 'Có kinh nghiệm xuất khẩu tới Mỹ/Châu Âu' },
+                { value: 'other_country', label: 'Có kinh nghiệm xuất khẩu tới các thị trường khác (Châu Á/Úc...)' },
+                { value: 'no_experience', label: 'Chưa có kinh nghiệm xuất khẩu' }
+            ], next: 12 },
+            12: { textVN: 'Thời gian bạn dự kiến bắt đầu bán hàng trên Amazon?', type: 'dropdown', required: false, options: [
+                { value: '3_6_months', label: 'Trong vòng 3-6 tháng tới' },
+                { value: 'unsure', label: 'Chưa biết/ Chưa chắc chắn' }
+            ], next: 13 },
+            13: { textVN: 'Thông báo quyền riêng tư và Thư đồng ý xử lý dữ liệu cá nhân từ Amazon Global Selling Vietnam', type: 'consent', required: true,
                 description: 'Bằng cách chọn "Tôi đồng ý":\n+ Tôi xác nhận đã xem xét và hiểu về "Thông báo quyền riêng tư & thư đồng ý xử lý dữ liệu cá nhân từ Amazon Global Selling Vietnam"\n+ Tôi đồng ý và chấp nhận các thông tin trong "Thông báo quyền riêng tư & thư đồng ý xử lý dữ liệu cá nhân từ Amazon Global Selling Vietnam"',
-                next: 'complete'
-            }
+                next: 'complete' }
         };
-
-        // Add subcategory questions dynamically
         Object.keys(categories).forEach(catKey => {
-            questions[`7_${catKey}`] = {
+            questions['7_' + catKey] = {
                 textVN: 'Lựa chọn nhóm sản phẩm bạn dự định bán (Có thể chọn nhiều mục)',
                 type: 'multiple',
                 required: true,
@@ -761,84 +233,48 @@
                 next: 8
             };
         });
-
         let currentQuestion = 1;
         let answers = {};
         let questionHistory = [];
-
-        // Check if admin panel should be shown
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('admin') === 'true') {
-            document.getElementById('survey-container').classList.add('hidden');
-            document.getElementById('admin-panel').classList.remove('hidden');
-        }
-
         function renderQuestion() {
             const question = questions[currentQuestion];
             if (!question) return;
-
             document.getElementById('question-title').innerHTML = question.textVN + (question.required ? ' <span class="required">*</span>' : '');
             document.getElementById('question-description').textContent = question.description || '';
-            
             const content = document.getElementById('question-content');
             content.innerHTML = '';
-
             if (question.type === 'text' || question.type === 'tel' || question.type === 'email') {
-                content.innerHTML = `<input type="${question.type}" class="input-field" id="answer-input" value="${answers[currentQuestion] || ''}" placeholder="Nhập câu trả lời / Enter answer">`;
+                content.innerHTML = '<input type="' + question.type + '" class="input-field" id="answer-input" value="' + (answers[currentQuestion] || '') + '" placeholder="Nhập câu trả lời / Enter answer">';
             } else if (question.type === 'dropdown') {
                 let options = '<option value="">-- Chọn / Select --</option>';
-                question.options.forEach(opt => {
-                    options += `<option value="${opt.value}" ${answers[currentQuestion] === opt.value ? 'selected' : ''}>${opt.label}</option>`;
+                question.options.forEach(function(opt) {
+                    options += '<option value="' + opt.value + '" ' + (answers[currentQuestion] === opt.value ? 'selected' : '') + '>' + opt.label + '</option>';
                 });
-                content.innerHTML = `<select class="select-field" id="answer-select">${options}</select>`;
+                content.innerHTML = '<select class="select-field" id="answer-select">' + options + '</select>';
             } else if (question.type === 'multiple') {
                 const selectedValues = answers[currentQuestion] || [];
-                question.options.forEach(opt => {
+                question.options.forEach(function(opt) {
                     const isSelected = selectedValues.includes(opt.value);
-                    content.innerHTML += `
-                        <div class="option-button ${isSelected ? 'selected' : ''}" onclick="toggleMultiple('${opt.value}')">
-                            <div class="checkbox ${isSelected ? 'checked' : ''}">
-                                ${isSelected ? '✓' : ''}
-                            </div>
-                            <span>${opt.vn}</span>
-                        </div>
-                    `;
+                    content.innerHTML += '<div class="option-button ' + (isSelected ? 'selected' : '') + '" onclick="toggleMultiple(\'' + opt.value + '\')"><div class="checkbox ' + (isSelected ? 'checked' : '') + '">' + (isSelected ? '✓' : '') + '</div><span>' + opt.vn + '</span></div>';
                 });
             } else if (question.type === 'file') {
-                content.innerHTML = `
-                    <div class="file-upload" onclick="document.getElementById('file-input').click()">
-                        <div class="file-upload-icon">📷</div>
-                        <p>Click to upload image</p>
-                        ${answers[currentQuestion] ? `<p style="color: #4CAF50; margin-top: 10px;">✓ ${answers[currentQuestion]}</p>` : ''}
-                    </div>
-                    <input type="file" id="file-input" accept="image/*" style="display: none;" onchange="handleFileUpload(event)">
-                `;
+                content.innerHTML = '<div class="file-upload" onclick="document.getElementById(\'file-input\').click()"><div style="font-size: 48px; margin-bottom: 10px;">📷</div><p>Click to upload image</p>' + (answers[currentQuestion] ? '<p style="color: #4CAF50; margin-top: 10px;">✓ ' + answers[currentQuestion] + '</p>' : '') + '</div><input type="file" id="file-input" accept="image/*" style="display: none;" onchange="handleFileUpload(event)">';
             } else if (question.type === 'consent') {
                 const isAgreed = answers[currentQuestion] === 'agreed';
-                content.innerHTML = `
-                    <div class="option-button ${isAgreed ? 'selected' : ''}" onclick="handleConsent()">
-                        <div class="checkbox ${isAgreed ? 'checked' : ''}">
-                            ${isAgreed ? '✓' : ''}
-                        </div>
-                        <span>Tôi đồng ý / I agree</span>
-                    </div>
-                `;
+                content.innerHTML = '<div class="option-button ' + (isAgreed ? 'selected' : '') + '" onclick="handleConsent()"><div class="checkbox ' + (isAgreed ? 'checked' : '') + '">' + (isAgreed ? '✓' : '') + '</div><span>Tôi đồng ý / I agree</span></div>';
             }
-
             updateProgress();
             document.getElementById('btn-back').disabled = questionHistory.length === 0;
         }
-
         function toggleMultiple(value) {
             const currentAnswers = answers[currentQuestion] || [];
             if (currentAnswers.includes(value)) {
-                answers[currentQuestion] = currentAnswers.filter(v => v !== value);
+                answers[currentQuestion] = currentAnswers.filter(function(v) { return v !== value; });
             } else {
-                answers[currentQuestion] = [...currentAnswers, value];
+                answers[currentQuestion] = currentAnswers.concat([value]);
             }
             renderQuestion();
         }
-
         function handleFileUpload(event) {
             const file = event.target.files[0];
             if (file) {
@@ -846,49 +282,35 @@
                 renderQuestion();
             }
         }
-
         function handleConsent() {
             answers[currentQuestion] = answers[currentQuestion] === 'agreed' ? '' : 'agreed';
             renderQuestion();
         }
-
         function goNext() {
             const question = questions[currentQuestion];
-            
             const input = document.getElementById('answer-input');
             if (input) {
                 answers[currentQuestion] = input.value.trim();
             }
-
             const select = document.getElementById('answer-select');
             if (select) {
                 answers[currentQuestion] = select.value;
             }
-
             const answer = answers[currentQuestion];
             if (question.required && (!answer || (Array.isArray(answer) && answer.length === 0))) {
                 alert('Vui lòng điền thông tin bắt buộc / Please fill in required field');
                 return;
             }
-
             questionHistory.push(currentQuestion);
-
             let nextQuestion;
-            
-            // Handle question 6 (category selection) - branches to subcategory
             if (currentQuestion === 6) {
-                const selectedOption = question.options.find(opt => opt.value === answers[currentQuestion]);
-                nextQuestion = selectedOption?.next;
-            } 
-            // Handle subcategory questions (7_*) - goes to question 8
-            else if (String(currentQuestion).startsWith('7_')) {
+                const selectedOption = question.options.find(function(opt) { return opt.value === answers[currentQuestion]; });
+                nextQuestion = selectedOption ? selectedOption.next : 8;
+            } else if (String(currentQuestion).indexOf('7_') === 0) {
                 nextQuestion = 8;
-            }
-            // All other questions follow standard next
-            else {
+            } else {
                 nextQuestion = question.next;
             }
-
             if (nextQuestion === 'complete') {
                 saveResponse();
                 showCompletion();
@@ -897,14 +319,12 @@
                 renderQuestion();
             }
         }
-
         function goBack() {
             if (questionHistory.length > 0) {
                 currentQuestion = questionHistory.pop();
                 renderQuestion();
             }
         }
-
         function updateProgress() {
             const totalQuestions = 13;
             const answeredQuestions = Object.keys(answers).length;
@@ -912,7 +332,6 @@
             document.getElementById('progress-fill').style.width = progress + '%';
             document.getElementById('progress-text').textContent = Math.round(progress) + '%';
         }
-
         function saveResponse() {
             const responses = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
             responses.push({
@@ -922,16 +341,13 @@
             });
             localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
         }
-
         function showCompletion() {
             document.getElementById('survey-screen').classList.add('hidden');
             document.getElementById('completion-screen').classList.remove('hidden');
-            
             if (answers[8]) {
                 document.getElementById('bonus-section').classList.remove('hidden');
             }
         }
-
         function restart() {
             currentQuestion = 1;
             answers = {};
@@ -941,13 +357,10 @@
             document.getElementById('bonus-section').classList.add('hidden');
             renderQuestion();
         }
-
-        // Admin Functions
         function goToAdmin() {
             document.getElementById('survey-container').classList.add('hidden');
             document.getElementById('admin-panel').classList.remove('hidden');
         }
-
         function adminLogin() {
             const password = document.getElementById('admin-password').value;
             if (password === ADMIN_PASSWORD) {
@@ -958,7 +371,6 @@
                 alert('Incorrect password!');
             }
         }
-
         function adminLogout() {
             document.getElementById('admin-panel').classList.add('hidden');
             document.getElementById('survey-container').classList.remove('hidden');
@@ -966,54 +378,37 @@
             document.getElementById('admin-content').classList.add('hidden');
             document.getElementById('admin-password').value = '';
         }
-
         function loadAdminData() {
             const responses = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-            
-            // Update stats
             document.getElementById('total-responses').textContent = responses.length;
-            
             const today = new Date().toDateString();
-            const todayCount = responses.filter(r => new Date(r.timestamp).toDateString() === today).length;
+            const todayCount = responses.filter(function(r) { return new Date(r.timestamp).toDateString() === today; }).length;
             document.getElementById('today-responses').textContent = todayCount;
-            
-            const withImages = responses.filter(r => r.answers[8]).length;
+            const withImages = responses.filter(function(r) { return r.answers[8]; }).length;
             document.getElementById('with-images').textContent = withImages;
-            
-            // Display responses
             const responsesList = document.getElementById('responses-list');
             responsesList.innerHTML = '';
-            
-            responses.reverse().forEach((response, index) => {
+            responses.slice().reverse().forEach(function(response, index) {
                 const date = new Date(response.timestamp);
                 const contactName = response.answers[1] || 'Unknown';
                 const company = response.answers[2] || 'N/A';
-                
                 const div = document.createElement('div');
                 div.className = 'response-detail';
-                div.innerHTML = `
-                    <div class="response-header">
-                        <span>#${responses.length - index} - ${contactName} (${company})</span>
-                        <span style="font-weight: normal; font-size: 14px;">${date.toLocaleString()}</span>
-                    </div>
-                    <div class="response-content" id="content-${response.id}">
-                        ${Object.entries(response.answers).map(([qId, answer]) => {
-                            const question = questions[qId];
-                            const answerText = Array.isArray(answer) ? answer.join(', ') : answer;
-                            return `<p><strong>${question?.textVN || qId}:</strong> ${answerText}</p>`;
-                        }).join('')}
-                    </div>
-                `;
-                
-                div.onclick = () => {
-                    const content = document.getElementById(`content-${response.id}`);
+                let contentHTML = '';
+                for (let qId in response.answers) {
+                    const question = questions[qId];
+                    const answer = response.answers[qId];
+                    const answerText = Array.isArray(answer) ? answer.join(', ') : answer;
+                    contentHTML += '<p><strong>' + (question ? question.textVN : qId) + ':</strong> ' + answerText + '</p>';
+                }
+                div.innerHTML = '<div class="response-header"><span>#' + (responses.length - index) + ' - ' + contactName + ' (' + company + ')</span><span style="font-weight: normal; font-size: 14px;">' + date.toLocaleString() + '</span></div><div class="response-content" id="content-' + response.id + '">' + contentHTML + '</div>';
+                div.onclick = function() {
+                    const content = document.getElementById('content-' + response.id);
                     content.classList.toggle('expanded');
                 };
-                
                 responsesList.appendChild(div);
             });
         }
-
         function adminExportJSON() {
             const responses = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
             const dataStr = JSON.stringify(responses, null, 2);
@@ -1021,44 +416,41 @@
             const url = URL.createObjectURL(dataBlob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `amazon-survey-all-responses-${Date.now()}.json`;
+            link.download = 'amazon-survey-all-responses-' + Date.now() + '.json';
             link.click();
         }
-
         function adminExportCSV() {
             const responses = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
             let csv = 'Response ID,Timestamp,Contact Name,Company,Phone,Email,Website,Category,Subcategories,Product Image,Business Type,Business ID,Export Experience,Start Timeline,Consent\n';
-            
-            responses.forEach(response => {
-                const answers = response.answers;
+            responses.forEach(function(response) {
+                const ans = response.answers;
+                const subcatKey = Object.keys(ans).find(function(k) { return k.indexOf('7_') === 0; });
                 const row = [
                     response.id,
                     new Date(response.timestamp).toLocaleString(),
-                    answers[1] || '',
-                    answers[2] || '',
-                    answers[3] || '',
-                    answers[4] || '',
-                    answers[5] || '',
-                    answers[6] || '',
-                    Array.isArray(answers[Object.keys(answers).find(k => k.startsWith('7_'))]) ? answers[Object.keys(answers).find(k => k.startsWith('7_'))].join('; ') : '',
-                    answers[8] || '',
-                    answers[9] || '',
-                    answers[10] || '',
-                    answers[11] || '',
-                    answers[12] || '',
-                    answers[13] || ''
+                    ans[1] || '',
+                    ans[2] || '',
+                    ans[3] || '',
+                    ans[4] || '',
+                    ans[5] || '',
+                    ans[6] || '',
+                    Array.isArray(ans[subcatKey]) ? ans[subcatKey].join('; ') : '',
+                    ans[8] || '',
+                    ans[9] || '',
+                    ans[10] || '',
+                    ans[11] || '',
+                    ans[12] || '',
+                    ans[13] || ''
                 ];
-                csv += row.map(cell => `"${cell}"`).join(',') + '\n';
+                csv += row.map(function(cell) { return '"' + cell + '"'; }).join(',') + '\n';
             });
-
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `amazon-survey-all-responses-${Date.now()}.csv`;
+            link.download = 'amazon-survey-all-responses-' + Date.now() + '.csv';
             link.click();
         }
-
         function clearAllData() {
             if (confirm('Are you sure you want to delete all survey responses? This cannot be undone!')) {
                 localStorage.removeItem(STORAGE_KEY);
@@ -1066,51 +458,7 @@
                 alert('All data has been cleared.');
             }
         }
-
-        // Initialize survey
-        if (urlParams.get('admin') !== 'true') {
-            renderQuestion();
-        }
+        renderQuestion();
     </script>
 </body>
-</html>: 9
-            },
-            9: {
-                textVN: 'Mô hình kinh doanh của bạn:',
-                type: 'dropdown',
-                required: false,
-                options: [
-                    { value: 'manufacturer', label: 'Nhà máy/Cơ sở sản xuất' },
-                    { value: 'local_brand', label: 'Thương hiệu trong nước (local brand)' },
-                    { value: 'individual', label: 'Cá nhân/Hộ kinh doanh' },
-                    { value: 'reseller', label: 'Nhà phân phối, đại lý, bán lẻ' },
-                    { value: 'other', label: 'Khác (vui lòng nêu rõ)' }
-                ],
-                next: 10
-            },
-            10: {
-                textVN: 'Vui lòng nhập mã định danh doanh nghiệp hoặc mã định danh cá nhân',
-                type: 'text',
-                required: false,
-                next: 11
-            },
-            11: {
-                textVN: 'Kinh nghiệm xuất khẩu của bạn:',
-                type: 'dropdown',
-                required: false,
-                options: [
-                    { value: 'us_eu', label: 'Có kinh nghiệm xuất khẩu tới Mỹ/Châu Âu' },
-                    { value: 'other_country', label: 'Có kinh nghiệm xuất khẩu tới các thị trường khác (Châu Á/Úc...)' },
-                    { value: 'no_experience', label: 'Chưa có kinh nghiệm xuất khẩu' }
-                ],
-                next: 12
-            },
-            12: {
-                textVN: 'Thời gian bạn dự kiến bắt đầu bán hàng trên Amazon?',
-                type: 'dropdown',
-                required: false,
-                options: [
-                    { value: '3_6_months', label: 'Trong vòng 3-6 tháng tới' },
-                    { value: 'unsure', label: 'Chưa biết/ Chưa chắc chắn' }
-                ],
-                next
+</html>
